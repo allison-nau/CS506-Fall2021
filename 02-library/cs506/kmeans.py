@@ -29,7 +29,25 @@ def update_centers(dataset, assignments):
     Compute the center for each of the assigned groups.
     Return `k` centers in a list
     """
-    raise NotImplementedError()
+    # Get list of groups:
+    group = list(set(assignments))
+    # Sort list:
+    group.sort()
+    # Create a group dict:
+    group_dict = {}
+    for g in group:
+        group_dict[g] = []
+    # Populate dictionary of groups:
+    for d in range(len(dataset)):
+        group_dict[assignments[d]].append(dataset[d])
+    # Compute centers:
+    centers = {}
+    for key, value in group_dict.items():
+        centers[key] = point_avg(value)
+    # Convert centers to list:
+    center_list = list(centers)
+    return centers
+
 
 def assign_points(data_points, centers):
     """
