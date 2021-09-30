@@ -11,7 +11,17 @@ def manhattan_dist(x, y):
     return res
 
 def jaccard_dist(x, y):
-    raise NotImplementedError()
+    total = 0
+    similar = 0
+    for i in range(len(x)):
+        total += 1
+        if x[i] == y[i]:
+            similar += 1
+    if total != 0:
+        distance = 1 - (similar/total)
+    else:
+        distance = 1
+    return distance
 
 def cosine_sim(x, y):
     raise NotImplementedError()
