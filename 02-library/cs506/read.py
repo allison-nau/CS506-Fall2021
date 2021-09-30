@@ -35,7 +35,7 @@ def read_csv(csv_file_path):
 
 def convert_to_numeric(a):
     """
-    Converts string values to numeric values in array "a".
+    Converts string values to numeric values in array "a". Strips "" from strings
     :param a: 2D array (list of lists).
     :return: cleaned array.
     Modified from HW0
@@ -44,7 +44,8 @@ def convert_to_numeric(a):
     for i in range(len(a)):
         for j in range(len(a[0])):
             try:
-                a[i][j] = float(a[i][j])
+                # TODO: should this be int or float?
+                a[i][j] = int(a[i][j])
             except ValueError:
-                pass
+                a[i][j] = a[i][j].strip('"')
     return a
