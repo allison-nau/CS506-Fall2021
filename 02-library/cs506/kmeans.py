@@ -2,7 +2,7 @@ from collections import defaultdict
 from math import inf
 import random
 import csv
-
+from .sim import *
 
 def point_avg(points):
     """
@@ -14,9 +14,9 @@ def point_avg(points):
     num_points = len(points)
     num_dim = len(points[0])
     average = []
-    for i in range(len(num_dim)):
+    for i in range(num_dim):
         sum = 0
-        for pt in range(len(num_points)):
+        for pt in range(num_points):
             sum += points[pt][i]
         average.append(sum/num_points)
     return average
@@ -69,17 +69,21 @@ def distance(a, b):
     """
     Returns the Euclidean distance between a and b
     """
-    raise NotImplementedError()
+    return euclidean_dist(a, b)
 
 def distance_squared(a, b):
-    raise NotImplementedError()
+    """
+    Returns euclidan distance squared
+    """
+    dist = euclidean_dist(a, b)
+    return dist ** 2
 
 def generate_k(dataset, k):
     """
     Given `data_set`, which is an array of arrays,
     return a random set of k points from the data_set
     """
-    raise NotImplementedError()
+    return random.sample(dataset, k)
 
 def cost_function(clustering):
     raise NotImplementedError()
