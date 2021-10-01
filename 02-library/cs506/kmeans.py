@@ -86,6 +86,7 @@ def generate_k(dataset, k):
     return random.sample(dataset, k)
 
 def cost_function(clustering):
+    # TODO I Don't understand what this function is supposed to do with only one input
     raise NotImplementedError()
 
 
