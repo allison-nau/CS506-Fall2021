@@ -17,7 +17,7 @@ setup(
   entry_points={
     'console_scripts': ['cs506=cs506.cli:main'],
   },
-  install_requires=[],
+  install_requires=["numpy"],
   python_requires='>=3.6, <4',
   setup_requires=['pytest-runner'],
   tests_require=tests_require,
