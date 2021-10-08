@@ -1,7 +1,8 @@
 """
 May need to be in virtual environment, but tox is not recognizing numpy is installed even when it is installed in
 all the different locations.
-
+Fix:
+https://stackoverflow.com/questions/54532961/pytest-says-modulenotfounderror-when-using-tox
 """
 
 # Import packages
