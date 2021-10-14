@@ -23,11 +23,23 @@ def process(path):
     df1.dropna(how="any", subset=["license"], inplace=True)
     # Private room only (1360, 18):
     df1 = df1[df1["room_type"] == "Private room"]
+    # Price <= 80 (510, 18)
+    df1 = df1[df1["price"] <= 80]
+    # Minimum nights <= 1 (196, 18)
+    df1 = df1[df1["minimum_nights"] <= 2]
+    # Number of reviewers >= 100 (66, 18)
+    df1 = df1[df1['number_of_reviews'] >= 100]
+    # Subset columns:
+    df1 = df1[["id", "latitude", "longitude", "room_type", "price", "availability_365"]]
+    # Sort on latitude and longitude:
+    df1 = df1.sort_values(by=["latitude", "longitude"], ascending=True)
     return df1
 
 
 df = process('listings.csv')
 print(f"Dimensions: {df.shape}")
+print(f"Column names:")
+print(df.columns)
 print(df)
 
 
