@@ -7,7 +7,12 @@ import statsmodels.api as sm
 
 import seaborn as sns; sns.set()
 
+# We generate our data
+# Then apply our transfrom of X and X transpose to the data
+# If you think X2 may be a term, you need to include it in the terms you try
+
 # plot line
+# We know what the parameters are Beta0 is 1, Beta1 is 0.5
 line = np.array([1, 0.5])
 xlin = -10.0 + 20.0 * np.random.random(100)
 ylin = line[0]+(line[1]*xlin)+np.random.randn(100)
@@ -15,13 +20,19 @@ plt.plot(xlin,ylin,'ro',markersize=4)
 plt.show()
 
 # plot quadratic
+# There are ways to explore your data so you can decide what parameters to try
 quad = np.array([1, 3, 0.5])
 xquad = -10.0 + 20.0 * np.random.random(100)
+# Calling it xquad is a little misleading
+# How did you know if was X2? That's where being a data scientist comes in
 yquad = quad[0]+(quad[1]*xquad)+(quad[2]*xquad*xquad)+np.random.randn(100)
 plt.plot(xquad,yquad,'ro',markersize=4)
 plt.show()
 
 # plot log
+# You can see that shape is clearly logarithmic so you need to include a log term
+# If we get negative points, then our model would bbe clearly wrong and it wasn't actually log
+# If you repeat this many times, you expect on average you will get the true values you had generated
 log = np.array([1, 4])
 xlog = 10.0 * np.random.random(100)
 ylog = log[0]+log[1]*np.log(xlog)+np.random.randn(100)
@@ -74,6 +85,8 @@ plt.show()
 print(beta)
 
 # using libraries
+# There are libraries to do this for you
+# We can plot this in 3D (pycharm showed it flat, but there may be a way to manipulate it)
 X, y = datasets.make_regression(n_samples=100, n_features=2, n_informative=5, noise=30, random_state=1)
 X = sm.add_constant(X)
 ax = plt.axes(projection='3d')
