@@ -6,6 +6,18 @@ from sklearn.pipeline import make_pipeline
 from sklearn.linear_model import LogisticRegression
 from sklearn.preprocessing import PolynomialFeatures
 
+
+# Here we are just generating data and seeing how model performs:
+# Just want to generate a line that separates our points:
+# Want to separate the two classes
+# Coloring indicates confidence (shades of red and shade of blue)
+# The boundary is a line
+# Changing how the log odds change as a function of X
+# Close to a decision boundary, we are not very confident
+# Far from a decision bounday, we are more confident
+# But maybe you shouldn't be confident in ranges of data you haven't seen...
+# Epoch: every iteration of logistic regression
+
 # LINE
 def generate_line_data():
     centers = [[0, 0]]
@@ -35,6 +47,7 @@ def generate_or_data():
     Y = np.array([x[0] or x[1] for x in X])
     return X, Y
 
+# XOR: one needs to be true, but NOT BOTH
 # XOR
 def generate_xor_data():
     X = np.array([
@@ -45,7 +58,9 @@ def generate_xor_data():
     Y = np.array([x[0]^x[1] for x in X])
     return X, Y
 
-X, Y = generate_line_data()
+# Do only one of the following lines:
+# X, Y = generate_line_data()
+X, Y = generate_xor_data()
 
 cs = np.array([x for x in 'bgrcmykbgrcmykbgrcmykbgrcmyk'])
 cs = np.hstack([cs] * 20)
@@ -54,11 +69,13 @@ plt.scatter(X[:,0],X[:,1],color=cs[Y].tolist(), s=50, alpha=0.8)
 plt.show()
 
 # for xor to be fit
-# poly = PolynomialFeatures(interaction_only=True)
-# lr = LogisticRegression(penalty='none', verbose=2, solver='sag')
-# model = make_pipeline(poly, lr).fit(X, Y)
+# Put in an interaction term:
+# Bend the space in your head
+poly = PolynomialFeatures(interaction_only=True)
+lr = LogisticRegression(penalty='none', verbose=2, solver='sag')
+model = make_pipeline(poly, lr).fit(X, Y)
 
-model = LogisticRegression(penalty='none', verbose=2, solver='sag').fit(X, Y)
+# model = LogisticRegression(penalty='none', verbose=2, solver='sag').fit(X, Y)
 
 # create a mesh to plot in
 h = .02  # step size in the mesh
@@ -79,3 +96,5 @@ T = model.predict(X)
 T = T.reshape(X[:,0].shape)
 ax.scatter(X[:, 0], X[:, 1], color=cs[Y].tolist(), s=50, alpha=0.9)
 plt.show()
+
+# You can do completely different parameters
