@@ -35,11 +35,20 @@ if ACTIVATION=="sigmoid":
     THRESH = 0.5
 
 
+# Can use a custom activation function
 def custom_activation(x):
+    x_0 = math.cos(x[...,0])
+
     return relu(x, threshold=0)
 
+# 10 H seeming learned the decision boundary better than 10H
+
+# Basically started with two neurons, which wasn't enough to approximate decision boundary
+# Move into higher dimension and separate using plane
 
 model = keras.models.Sequential()
+# Can try different activation functions
+# reduce number of epochs (iterations) to get this to run faster
 model.add(layers.Dense(2, input_dim=2, activation=custom_activation))
 model.add(layers.Dense(1, activation=ACTIVATION))
 #opt = keras.optimizers.Adam(learning_rate=.01)
